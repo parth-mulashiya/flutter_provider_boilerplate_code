@@ -1,0 +1,9 @@
+{
+    "@@locale": "en",
+    "appTitle": "Flutter Boilerplate",
+    "login": "Login",
+    "expenses": "Expenses",
+    "language": "Language",
+    "welcomeBack": "Welcome Back!"
+  }
+  
