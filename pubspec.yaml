@@ -21,9 +21,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
-  # Optional: for animations (not strictly necessary)
-  animated_widgets: ^1.1.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
