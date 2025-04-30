@@ -15,31 +15,101 @@ class SecondProvider with ChangeNotifier {
   List<Post> get posts => _posts;
   bool get isLoading => _isLoading;
   String get error => _error;
+  bool get hasMorePosts => _hasMorePosts;
+  bool get isFetchingMore => _isFetchingMore;
+  int get currentPage => _currentPage;
 
   // Constructor
   SecondProvider(this._apiService);
 
+  int _currentPage = 1;
+  final int _postsPerPage = 10;
+  bool _hasMorePosts = true;
+  bool _isFetchingMore = false;
+
+  void _setFetchingMore(bool fetching) {
+    _isFetchingMore = fetching;
+    notifyListeners();
+  }
+
   // Fetch all posts from JSONPlaceholder API
-  Future<void> fetchAllPosts() async {
+  Future<void> fetchAllPosts({bool refresh = false}) async {
     try {
-      _setLoading(true);
+      // If refreshing, reset pagination state
+      if (refresh) {
+        _currentPage = 1;
+        _hasMorePosts = true;
+        _posts = [];
+        _setLoading(true);
+      } else if (_isFetchingMore) {
+        // Prevent multiple pagination requests
+        return;
+      } else if (!_hasMorePosts) {
+        // No more posts to fetch
+        return;
+      }
+
+      // Set appropriate loading state
+      if (_currentPage == 1) {
+        _setLoading(true);
+      } else {
+        _setFetchingMore(true);
+      }
+
       _error = '';
 
+      // Construct URL with pagination parameters
+      final url =
+          '${ApiConstants.baseUrl}?_page=$_currentPage&_limit=$_postsPerPage';
+
       // Using the get method from ApiService
-      final response = await _apiService.get(ApiConstants.baseUrl);
+      final response = await _apiService.get(url);
 
       if (response != null) {
         // Parse the response data
-        final List<dynamic> responseData = response.data;
-        _posts = responseData.map((json) => Post.fromJson(json)).toList();
+        final List responseData = response.data;
+
+        // Check if we've reached the end of available posts
+        if (responseData.isEmpty) {
+          _hasMorePosts = false;
+        } else {
+          // Convert JSON to Post objects
+          final newPosts =
+              responseData.map((json) => Post.fromJson(json)).toList();
+
+          // If refreshing or first page, replace posts; otherwise, add to existing list
+          if (refresh || _currentPage == 1) {
+            _posts = newPosts;
+          } else {
+            _posts.addAll(newPosts);
+          }
+
+          // Increment page for next fetch
+          _currentPage++;
+        }
+
         _setLoading(false);
+        _setFetchingMore(false);
         notifyListeners();
       } else {
         _setError('Failed to load posts');
       }
     } catch (e) {
       _setError('An error occurred: ${e.toString()}');
+      _setFetchingMore(false);
     }
+  }
+
+  // Add a method to load more posts when scrolling
+  Future<void> loadMorePosts() async {
+    if (!_isLoading && !_isFetchingMore && _hasMorePosts) {
+      await fetchAllPosts();
+    }
+  }
+
+  // Reset method for refreshing
+  void refreshPosts() {
+    fetchAllPosts(refresh: true);
   }
 
   // Get a single post by ID

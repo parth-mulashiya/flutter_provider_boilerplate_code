@@ -478,7 +478,7 @@ class _AboutScreenState extends State<AboutScreen> {
                     },
                   ),
                   SizedBox(height: 8.h),
-                  OutlinedButton.icon(
+                  FilledButton.icon(
                     icon: const Icon(Icons.warning_amber),
                     label: const Text("Show Banner"),
                     onPressed: () {

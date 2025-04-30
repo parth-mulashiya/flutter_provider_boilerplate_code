@@ -109,7 +109,7 @@ class LoginScreen extends StatelessWidget {
                                   // );
 
                                   if (context.mounted) {
-                                    context.push(AppRoutes.home);
+                                    context.pushReplacement(AppRoutes.home);
                                   }
                                 }
                               },
