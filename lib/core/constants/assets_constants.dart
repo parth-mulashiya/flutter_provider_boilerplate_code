@@ -8,7 +8,7 @@ class AssetsConstants {
   static const String icBackWhite = 'assets/icons/ic_back_white.png';
 
   //Fonts
-  static const String font = 'Roboto';
+  static const String font = 'Poppins';
   static const String secondaryFont = 'RobotoBold';
 
   //Animations
