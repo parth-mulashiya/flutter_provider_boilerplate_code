@@ -7,6 +7,7 @@ This is a Flutter project designed with a modular structure for easy scalability
 
 ## Folder Structure
 
+```
 lib/
 ├── core/
 │   ├── constants/
@@ -48,7 +49,7 @@ lib/
 │   │   └── no_network_screen.dart
 │   └── second_screen.dart
 └── utils/
-    └── responsive_util.dart.
+    └── responsive_util.dart.```
 
 ## Packages
 
