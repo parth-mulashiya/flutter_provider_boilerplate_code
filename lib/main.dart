@@ -1,4 +1,4 @@
-import 'package:demo_app/core/network/api_service.dart';
+import 'package:demo_app/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'core/constants/color_constants.dart';
 import 'core/services/language_service.dart';
 import 'core/theme/theme_notifier.dart';
-import 'providers/second_provider.dart';
 import 'routes/route_generator.dart';
 import 'core/services/shared_prefs_service.dart';
 
@@ -32,21 +31,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) {
         return MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => ThemeNotifier()),
-            ChangeNotifierProvider(create: (_) => ApiService()),
-
-            ChangeNotifierProvider<LanguageService>.value(
-              value: languageService,
-            ),
-
-            ChangeNotifierProxyProvider<ApiService, SecondProvider>(
-              create: (_) => SecondProvider(ApiService()),
-              update:
-                  (_, apiService, secondProvider) =>
-                      secondProvider ?? SecondProvider(apiService),
-            ),
-          ],
+          providers: globalProviders,
           child: Consumer2<ThemeNotifier, LanguageService>(
             builder: (context, themeNotifier, languageService, _) {
               return MaterialApp.router(
