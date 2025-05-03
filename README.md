@@ -15,11 +15,14 @@ lib/
 │   │   ├── assets_constants.dart
 │   │   ├── color_constants.dart
 │   │   ├── common_constants.dart
+|   |   ├── lang_constants.dart
 │   │   ├── storage_constants.dart
-│   │   └── string_constants.dart
+│   │   ├── string_constants.dart
+│   │   └── validator.dart
 │   ├── network/
 │   │   └── api_service.dart
 │   ├── services/
+│   │   ├── language_service.dart
 │   │   └── shared_prefs_service.dart
 │   ├── theme/
 │   │   ├── app_theme.dart
@@ -30,8 +33,6 @@ lib/
 │       ├── app_text_button.dart
 │       ├── app_text_field.dart
 │       └── app_toast.dart
-├── l10n/
-│   └── app_localizations.dart
 ├── models/
 │   └── post_model.dart
 ├── providers/
