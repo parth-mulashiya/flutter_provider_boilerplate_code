@@ -28,12 +28,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  
-  # Localization config
-  generate: true
 
   assets:
     - assets/images/
+    - assets/language/
 
   fonts:
     - family: Poppins

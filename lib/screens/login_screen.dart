@@ -1,10 +1,11 @@
+import 'package:demo_app/core/constants/lang_constants.dart';
+import 'package:demo_app/core/services/language_service.dart';
 import 'package:demo_app/routes/app_routes.dart';
 import 'package:demo_app/utils/responsive_util.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../core/theme/theme_notifier.dart';
-import '../l10n/app_localizations.dart';
 import '../providers/login_provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,13 +13,17 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final langauge = Provider.of<LanguageService>(context, listen: false);
     return ChangeNotifierProvider(
       create: (_) => LoginProvider(),
-      child: Consumer<LoginProvider>(
-        builder: (context, loginProvider, child) {
+      child: Consumer2<LoginProvider, LanguageService>(
+        builder: (context, loginProvider, languageService, child) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Login'),
+              title: Text(
+                (langauge.translations[LangConst.appName] ?? 'App').toString(),
+                style: TextStyle(fontSize: 24),
+              ),
               actions: [
                 Consumer<ThemeNotifier>(
                   builder: (context, themeNotifier, child) {
@@ -27,6 +32,7 @@ class LoginScreen extends StatelessWidget {
                         themeNotifier.isDark
                             ? Icons.light_mode
                             : Icons.dark_mode,
+                        size: 24,
                       ),
                       onPressed: () {
                         themeNotifier.toggleTheme();
@@ -39,8 +45,8 @@ class LoginScreen extends StatelessWidget {
             body: Padding(
               padding: EdgeInsets.all(
                 ResponsiveUtil.isDesktop(context)
-                    ? 60.0
-                    : ResponsiveUtil.isDesktop(context)
+                    ? 120.0
+                    : ResponsiveUtil.isTablet(context)
                     ? 40.0
                     : 20.0,
               ),
@@ -48,7 +54,9 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppLocalizations.of(context).welcomeBack,
+                    (langauge.translations[LangConst.welcomeMessage] ??
+                            'Welcome')
+                        .toString(),
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 16),
@@ -113,8 +121,35 @@ class LoginScreen extends StatelessWidget {
                                   }
                                 }
                               },
-                              child: const Text('Login'),
+                              child: const Text(
+                                'Login',
+                                style: TextStyle(fontSize: 18),
+                              ),
                             ),
+                        const SizedBox(height: 16),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                langauge.changeLanguage(const Locale('en'));
+                              },
+                              child: Text('A'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                langauge.changeLanguage(const Locale('hi'));
+                              },
+                              child: Text('अ'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                langauge.changeLanguage(const Locale('gu'));
+                              },
+                              child: Text('અ'),
+                            ),
+                          ],
+                        ),
                       ],
                     ),
                   ),

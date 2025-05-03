@@ -1,0 +1,16 @@
+
+
+{
+    "en":{
+        "app_name":"My App",
+        "welcome_message":"Welcome to My App!"
+    },
+    "hi":{
+        "app_name":"मेरी ऐप",
+        "welcome_message":"मेरी ऐप में आपका स्वागत है!"
+    },
+    "gu":{
+        "app_name":"મારી એપ",
+        "welcome_message":"મારી એપમાં આપનું સ્વાગત છે!"
+    }
+}

@@ -5,4 +5,5 @@ class StorageConstants {
   static const String userEmail = 'user_email';
   static const String userPhone = 'user_phone';
   static const String userProfileImage = 'user_profile_image';
+  static const String locale = 'locale';
 }

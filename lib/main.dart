@@ -5,8 +5,8 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'core/constants/color_constants.dart';
+import 'core/services/language_service.dart';
 import 'core/theme/theme_notifier.dart';
-import 'l10n/app_localizations.dart';
 import 'providers/second_provider.dart';
 import 'routes/route_generator.dart';
 import 'core/services/shared_prefs_service.dart';
@@ -15,11 +15,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsService.init();
   configLoading();
-  runApp(const MyApp());
+
+  // Preload LanguageService and fetch translations
+  final languageService = LanguageService();
+  await languageService.fetchTranslations();
+  runApp(MyApp(languageService: languageService));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final LanguageService languageService;
+  const MyApp({super.key, required this.languageService});
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +36,10 @@ class MyApp extends StatelessWidget {
             ChangeNotifierProvider(create: (_) => ThemeNotifier()),
             ChangeNotifierProvider(create: (_) => ApiService()),
 
+            ChangeNotifierProvider<LanguageService>.value(
+              value: languageService,
+            ),
+
             ChangeNotifierProxyProvider<ApiService, SecondProvider>(
               create: (_) => SecondProvider(ApiService()),
               update:
@@ -38,34 +47,24 @@ class MyApp extends StatelessWidget {
                       secondProvider ?? SecondProvider(apiService),
             ),
           ],
-          child: Consumer<ThemeNotifier>(
-            builder: (context, themeNotifier, _) {
+          child: Consumer2<ThemeNotifier, LanguageService>(
+            builder: (context, themeNotifier, languageService, _) {
               return MaterialApp.router(
                 debugShowCheckedModeBanner: false,
                 theme: themeNotifier.currentTheme,
                 routerConfig: RouterManager.router,
                 builder: EasyLoading.init(),
+                locale: languageService.currentLocale,
                 supportedLocales: const [
-                  Locale('hi', ''),
-                  Locale('gu', ''),
-                  Locale('en', ''),
+                  Locale('en'),
+                  Locale('hi'),
+                  Locale('gu'),
                 ],
                 localizationsDelegates: const [
-                  AppLocalizationsDelegate(),
                   GlobalMaterialLocalizations.delegate,
                   GlobalWidgetsLocalizations.delegate,
                   GlobalCupertinoLocalizations.delegate,
                 ],
-                localeResolutionCallback: (locale, supportedLocales) {
-                  if (locale != null) {
-                    for (var supportedLocale in supportedLocales) {
-                      if (supportedLocale.languageCode == locale.languageCode) {
-                        return supportedLocale;
-                      }
-                    }
-                  }
-                  return supportedLocales.first;
-                },
               );
             },
           ),
