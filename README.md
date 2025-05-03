@@ -51,8 +51,10 @@ lib/
 │   ├── other_screen/
 │   │   └── no_network_screen.dart
 │   └── second_screen.dart
-└── utils/
-    └── responsive_util.dart.
+├── utils/
+|   └── responsive_util.dart.
+├── di.dart
+└── main.dart
 ```
 
 ## Packages
