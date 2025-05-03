@@ -1,4 +1,7 @@
 import 'package:demo_app/core/constants/lang_constants.dart';
+import 'package:demo_app/core/extensions/core_extenstion.dart';
+import 'package:demo_app/core/extensions/lang_extension.dart';
+import 'package:demo_app/core/extensions/padding_extension.dart';
 import 'package:demo_app/core/services/language_service.dart';
 import 'package:demo_app/routes/app_routes.dart';
 import 'package:demo_app/utils/responsive_util.dart';
@@ -21,7 +24,7 @@ class LoginScreen extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text(
-                (langauge.translations[LangConst.appName] ?? 'App').toString(),
+                context.tr(LangConst.appName),
                 style: TextStyle(fontSize: 24),
               ),
               actions: [
@@ -42,6 +45,7 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
+            backgroundColor: context.theme.scaffoldBackgroundColor,
             body: Padding(
               padding: EdgeInsets.all(
                 ResponsiveUtil.isDesktop(context)
@@ -54,12 +58,10 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    (langauge.translations[LangConst.welcomeMessage] ??
-                            'Welcome')
-                        .toString(),
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    context.tr(LangConst.welcomeMessage),
+                    style: context.textTheme.displaySmall,
                   ),
-                  const SizedBox(height: 16),
+                  16.heightBox,
                   Form(
                     child: Column(
                       children: [
@@ -85,7 +87,7 @@ class LoginScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 16),
+                        16.heightBox,
                         TextFormField(
                           initialValue: loginProvider.password,
                           onChanged: (value) {
@@ -103,7 +105,7 @@ class LoginScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(height: 24),
+                        24.heightBox,
                         loginProvider.isLoading
                             ? const CircularProgressIndicator()
                             : ElevatedButton(
@@ -126,7 +128,7 @@ class LoginScreen extends StatelessWidget {
                                 style: TextStyle(fontSize: 18),
                               ),
                             ),
-                        const SizedBox(height: 16),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
@@ -149,7 +151,7 @@ class LoginScreen extends StatelessWidget {
                               child: Text('અ'),
                             ),
                           ],
-                        ),
+                        ).paddingTop(30),
                       ],
                     ),
                   ),

@@ -3,36 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../constants/color_constants.dart';
 
-class AppTextButton extends StatelessWidget {
-  final String text;
-  final VoidCallback onPressed;
-  final Color? color;
-  final double? fontSize;
-
-  const AppTextButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.color,
-    this.fontSize,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: TextStyle(
-          color: color ?? Theme.of(context).primaryColor,
-          fontSize: fontSize ?? 16,
-        ),
-      ),
-    );
-  }
-}
-
-class ButtonWidget extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final Color? color;
@@ -42,7 +13,7 @@ class ButtonWidget extends StatelessWidget {
   final double? verticalPadding;
   final double? iconSize;
   final bool? isLoading;
-  const ButtonWidget({
+  const AppButton({
     super.key,
     required this.onPressed,
     required this.text,

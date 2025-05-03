@@ -18,7 +18,7 @@ void main() async {
 
   // Preload LanguageService and fetch translations
   final languageService = LanguageService();
-  await languageService.fetchTranslations();
+  // await languageService.fetchTranslations();
   runApp(MyApp(languageService: languageService));
 }
 

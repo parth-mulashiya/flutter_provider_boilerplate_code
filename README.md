@@ -1,5 +1,5 @@
 
-# Flutter Provider Demo App
+# Flutter Provider Boilerplate Code
 
 ## Description
 
@@ -19,6 +19,10 @@ lib/
 │   │   ├── storage_constants.dart
 │   │   ├── string_constants.dart
 │   │   └── validator.dart
+│   ├── extenstions/
+│   │   ├── core_extenstion.dart
+│   │   ├── lang_exetnstion.dart
+│   │   └── padding_extenstion.dart
 │   ├── network/
 │   │   └── api_service.dart
 │   ├── services/
@@ -28,9 +32,7 @@ lib/
 │   │   ├── app_theme.dart
 │   │   └── theme_notifier.dart
 │   └── widgets/
-│       ├── app_icon_button.dart
-│       ├── app_loader.dart
-│       ├── app_text_button.dart
+│       ├── app_button.dart
 │       ├── app_text_field.dart
 │       └── app_toast.dart
 ├── models/
