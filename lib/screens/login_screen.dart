@@ -1,5 +1,5 @@
 import 'package:demo_app/core/constants/lang_constants.dart';
-import 'package:demo_app/core/extensions/core_extenstion.dart';
+import 'package:demo_app/core/extensions/core_extension.dart';
 import 'package:demo_app/core/extensions/lang_extension.dart';
 import 'package:demo_app/core/extensions/padding_extension.dart';
 import 'package:demo_app/core/services/language_service.dart';

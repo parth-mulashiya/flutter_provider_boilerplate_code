@@ -1,6 +1,8 @@
 // lib/screens/home_screen.dart
 
+import 'package:demo_app/core/animations/animated_text.dart';
 import 'package:demo_app/core/constants/api_constants.dart';
+import 'package:demo_app/core/extensions/core_extension.dart';
 import 'package:demo_app/core/network/api_service.dart';
 import 'package:demo_app/routes/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -42,13 +44,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Consumer<ApiService>(
         builder: (context, apiService, child) {
           _isLoading = apiService.isLoading;
-          return Padding(
+          return Container(
+            width: context.screenWidth,
             padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  'Welcome to the Home Screen!',
+                AnimatedText(
+                  text: 'Welcome to the Home Screen!',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 20),

@@ -24,10 +24,10 @@ lib/
 │   │   ├── storage_constants.dart
 │   │   ├── string_constants.dart
 │   │   └── validator.dart
-│   ├── extenstions/
-│   │   ├── core_extenstion.dart
-│   │   ├── lang_exetnstion.dart
-│   │   └── padding_extenstion.dart
+│   ├── extensions/
+│   │   ├── core_extension.dart
+│   │   ├── lang_exetnsion.dart
+│   │   └── padding_extension.dart
 │   ├── network/
 │   │   └── api_service.dart
 │   ├── services/
