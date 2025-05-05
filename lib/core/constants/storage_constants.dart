@@ -6,4 +6,5 @@ class StorageConstants {
   static const String userPhone = 'user_phone';
   static const String userProfileImage = 'user_profile_image';
   static const String locale = 'locale';
+  static const String isDarkMode = 'is_dark_mode';
 }

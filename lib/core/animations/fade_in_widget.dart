@@ -5,10 +5,10 @@ class FadeInWidget extends StatelessWidget {
   final Duration duration;
 
   const FadeInWidget({
-    Key? key,
+    super.key,
     required this.child,
     this.duration = const Duration(milliseconds: 500),
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

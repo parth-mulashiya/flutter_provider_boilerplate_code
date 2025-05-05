@@ -10,6 +10,11 @@ This is a Flutter project designed with a modular structure for easy scalability
 ```
 lib/
 ├── core/
+│   ├── animations/
+│   │   ├── animated_text.dart
+│   │   ├── fade_in_widget.dart
+│   │   ├── slide_fade_animation.dart
+│   │   └── slide_in_widget.dart
 │   ├── constants/
 │   │   ├── api_constants.dart
 │   │   ├── assets_constants.dart
@@ -52,7 +57,7 @@ lib/
 │   │   └── no_network_screen.dart
 │   └── second_screen.dart
 ├── utils/
-|   └── responsive_util.dart.
+│   └── responsive_util.dart.
 ├── di.dart
 └── main.dart
 ```
@@ -67,6 +72,7 @@ lib/
 * `go_router`: Used for routing and navigation.
 * `fluttertoast`: Used for displaying toast notifications.
 * `intl`: Used for internationalization and localization.
+* `flutter_localizations`: Used for providing built-in Flutter widget localization and support for multiple languages.
 
 ## Getting Started
 

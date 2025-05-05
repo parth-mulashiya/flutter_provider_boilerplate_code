@@ -8,6 +8,8 @@ import 'package:demo_app/utils/responsive_util.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import '../core/animations/animated_text.dart';
+import '../core/animations/slide_fade_animation.dart';
 import '../core/theme/theme_notifier.dart';
 import '../providers/login_provider.dart';
 
@@ -57,6 +59,11 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  AnimatedText(
+                    text: "welcome to Flutter App ",
+                    style: context.textTheme.displaySmall,
+                  ),
+                  15.heightBox,
                   Text(
                     context.tr(LangConst.welcomeMessage),
                     style: context.textTheme.displaySmall,
@@ -65,27 +72,31 @@ class LoginScreen extends StatelessWidget {
                   Form(
                     child: Column(
                       children: [
-                        TextFormField(
-                          initialValue: loginProvider.email,
-                          onChanged: (value) {
-                            loginProvider.setEmail(value);
-                          },
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: const InputDecoration(
-                            labelText: 'Email',
-                            border: OutlineInputBorder(),
+                        SlideFadeAnimation(
+                          direction: SlideDirection.leftToRight,
+                          duration: Duration(milliseconds: 800),
+                          child: TextFormField(
+                            initialValue: loginProvider.email,
+                            onChanged: (value) {
+                              loginProvider.setEmail(value);
+                            },
+                            keyboardType: TextInputType.emailAddress,
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                              border: OutlineInputBorder(),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              if (!RegExp(
+                                r'^[^@]+@[^@]+\.[^@]+',
+                              ).hasMatch(value)) {
+                                return 'Please enter a valid email address';
+                              }
+                              return null;
+                            },
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your email';
-                            }
-                            if (!RegExp(
-                              r'^[^@]+@[^@]+\.[^@]+',
-                            ).hasMatch(value)) {
-                              return 'Please enter a valid email address';
-                            }
-                            return null;
-                          },
                         ),
                         16.heightBox,
                         TextFormField(
