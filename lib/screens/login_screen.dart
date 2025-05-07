@@ -1,5 +1,6 @@
 import 'package:demo_app/core/constants/lang_constants.dart';
 import 'package:demo_app/core/extensions/core_extension.dart';
+import 'package:demo_app/core/extensions/date_time_extension.dart';
 import 'package:demo_app/core/extensions/lang_extension.dart';
 import 'package:demo_app/core/extensions/padding_extension.dart';
 import 'package:demo_app/core/services/language_service.dart';
@@ -169,6 +170,9 @@ class LoginScreen extends StatelessWidget {
                 ],
               ),
             ),
+            bottomNavigationBar: AnimatedText(
+              text: DateTime.now().toLongDate,
+            ).paddingSymmetric(vertical: 20, horizontal: 50),
           );
         },
       ),
